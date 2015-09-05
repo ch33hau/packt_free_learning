@@ -8,8 +8,12 @@ PASSWORD=""
 CREDENTIALS_FILE="$HOME/.packt"
 
 # Options
-DOWNLOAD=Y
+DOWNLOAD=$PACKT_DOWNLOAD
 DOWNLOAD_PATH="$HOME/packt"
+
+if [ -z "$DOWNLOAD" ]; then
+	DOWNLOAD="Y"
+fi
 
 if [ -f $CREDENTIALS_FILE ];
 then
@@ -53,13 +57,16 @@ COMMAND_CLAIM_FREE_BOOK="curl -i -s --cookie $login_cookie $book_url"
 
 $COMMAND_CLAIM_FREE_BOOK > /dev/null 2>&1
 
-mkdir -p $DOWNLOAD_PATH
+if [ "Y" = "$DOWNLOAD" ]; then
+	mkdir -p $DOWNLOAD_PATH
 
-URL_DOWNLOAD_BOOK="https://www.packtpub.com/ebook_download/$book_number/pdf"
-BOOK_LOCATION="$DOWNLOAD_PATH"/"$book_title".pdf
-COMMAND_DOWNLOAD_BOOK="curl -s -i --cookie $login_cookie $URL_DOWNLOAD_BOOK"
+	URL_DOWNLOAD_BOOK="https://www.packtpub.com/ebook_download/$book_number/pdf"
+	BOOK_LOCATION="$DOWNLOAD_PATH"/"$book_title".pdf
+	COMMAND_DOWNLOAD_BOOK="curl -s -i --cookie $login_cookie $URL_DOWNLOAD_BOOK"
 
-echo "Downloading to $BOOK_LOCATION..."
-$COMMAND_DOWNLOAD_BOOK > "$BOOK_LOCATION"
-echo "Downloaded to $BOOK_LOCATION"
-
+	echo "Downloading to $BOOK_LOCATION..."
+	$COMMAND_DOWNLOAD_BOOK > "$BOOK_LOCATION"
+	echo "Downloaded to $BOOK_LOCATION"
+else
+	echo "Free book has added to your Packt account."
+fi
