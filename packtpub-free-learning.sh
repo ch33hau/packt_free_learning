@@ -11,6 +11,9 @@ CREDENTIALS_FILE="$HOME/.packt"
 DOWNLOAD=$PACKT_DOWNLOAD
 DOWNLOAD_PATH="$HOME/packt"
 
+# Log running information
+echo "Date: $(date)"
+
 if [ -z "$DOWNLOAD" ]; then
 	DOWNLOAD="Y"
 fi
