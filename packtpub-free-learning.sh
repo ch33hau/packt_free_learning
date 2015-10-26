@@ -34,6 +34,7 @@ then
 	read PASSWORD
 	credentials_base64=`echo "$USERNAME:$PASSWORD" | base64`
 	echo $credentials_base64 > $CREDENTIALS_FILE
+	chmod 400 $CREDENTIALS_FILE
 	echo "Your credentials was saved to $CREDENTIALS_FILE in base64 encoded format."
 fi
 
