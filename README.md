@@ -13,3 +13,13 @@ Default download location is $HOME/packt/.
 If you prefer not to download the claimed free book (eg, running cronjob at server):
 
     PACKT_DOWNLOAD=N bash -c "$(curl -s https://raw.githubusercontent.com/ch33hau/packt_free_learning/master/packtpub-free-learning.sh)"
+
+### Docker Usage
+
+First build the docker image:
+
+    docker build --tag=packt .
+
+Then run the docker container:
+
+    docker run --rm -ti -v $(pwd):/root packt
