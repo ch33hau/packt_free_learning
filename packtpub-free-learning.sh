@@ -47,7 +47,10 @@ URL_FREE_LEARNING="https://www.packtpub.com/packt/offers/free-learning"
 COMMAND_FREE_LEARNING="curl -s -X GET $URL_FREE_LEARNING"
 
 response_login=$($COMMAND_LOGIN > $TMP_FILE)
-login_cookie=$(cat $TMP_FILE | grep Set-Cookie | tail -1 | grep -Po "Set-Cookie: (\w*=*\w*)" | cut -d\  -f2)
+login_cookie=$(cat $TMP_FILE | grep Set-Cookie | tail -1 | grep -Po "Set-Cookie: (SESS_live=*\w*)" | cut -d\  -f2)
+if [[ -z "$login_cookie" ]]; then
+        login_cookie=$(cat $TMP_FILE | grep Set-Cookie | tail -2 | grep -Po "Set-Cookie: (SESS_live=*\w*)" | cut -d\  -f2)
+fi
 
 response_freelearning=$($COMMAND_FREE_LEARNING)
 book_title=$(echo $response_freelearning | grep -Po "(?<=<div class=\"dotd-title\"> <h2> )[\w .-]+(?= <\/h2> <\/div>)")
