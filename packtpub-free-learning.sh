@@ -69,7 +69,7 @@ if [ "Y" = "$DOWNLOAD" ]; then
 
 	URL_DOWNLOAD_BOOK="https://www.packtpub.com/ebook_download/$book_number/pdf"
 	BOOK_LOCATION="$DOWNLOAD_PATH"/"$book_title".pdf
-	COMMAND_DOWNLOAD_BOOK="curl -s -i --cookie $login_cookie $URL_DOWNLOAD_BOOK"
+	COMMAND_DOWNLOAD_BOOK="curl -s -L --cookie $login_cookie $URL_DOWNLOAD_BOOK"
 
 	echo "Downloading to $BOOK_LOCATION..."
 	$COMMAND_DOWNLOAD_BOOK > "$BOOK_LOCATION"
