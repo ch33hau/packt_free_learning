@@ -53,7 +53,7 @@ if [[ -z "$login_cookie" ]]; then
 fi
 
 response_freelearning=$($COMMAND_FREE_LEARNING)
-book_title=$(echo $response_freelearning | grep -Po "(?<=<div class=\"dotd-title\"> <h2> )[\w .-]+(?= <\/h2> <\/div>)")
+book_title=$(echo $response_freelearning | grep -Po "(?<=<div class=\"dotd-title\"> <h2> )[\w .-:]+(?= <\/h2> <\/div>)")
 book_href=$(echo $response_freelearning | grep -Po "(?<=<a href=\")[\w \/-]+(?=\" class=\"twelve-days-claim\")")
 book_number=$(echo $book_href | cut -d/ -f3)
 book_url=$URL_LOGIN$book_href
